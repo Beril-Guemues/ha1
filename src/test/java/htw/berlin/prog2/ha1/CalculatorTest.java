@@ -90,5 +90,21 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
-}
 
+@ Test
+@DisplayName ("should add decimal point when pressing dot key")
+void testPressDotKeyAddsDecimalPoint () {
+    Calculator calc = new Calculator ();
+
+    calc.pressDigitKey(5);
+    calc.pressDotKey();
+    calc.pressDigitKey(7);
+
+    String expected = "5.7";
+    String actual = calc.readScreen();
+
+    assertEquals(expected, actual);
+
+
+  }
+}
