@@ -90,21 +90,30 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+    @Test
+    @DisplayName("should reset display with clear key")
+    void testClearKeyResetsDisplay() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(8);
+        calc.pressDigitKey(9);
+        calc.pressClearKey();
 
-@ Test
-@DisplayName ("should add decimal point when pressing dot key")
-void testPressDotKeyAddsDecimalPoint () {
-    Calculator calc = new Calculator ();
+        String expected = "0";
+        String actual = calc.readScreen();
 
-    calc.pressDigitKey(5);
-    calc.pressDotKey();
-    calc.pressDigitKey(7);
+        assertEquals(expected, actual);
+    }
 
-    String expected = "5.7";
-    String actual = calc.readScreen();
+    @Test
+    @DisplayName("should not display negative zero")
+    void testNoNegativeZero() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(0);
+        calc.pressNegativeKey();
 
-    assertEquals(expected, actual);
+        String expected = "0";
+        String actual = calc.readScreen();
 
-
-  }
+        assertEquals(expected, actual);
+    }
 }
