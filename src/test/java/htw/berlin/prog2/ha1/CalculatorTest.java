@@ -103,5 +103,38 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+    @Test
+    @DisplayName("should not display negative zero")
+    void testNoNegativeZero() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(0);
+        calc.pressNegativeKey();
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+    @Test
+    @DisplayName("should limit input number to 9 digits")
+    void testInput() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(3);
+        calc.pressDigitKey(4);
+        calc.pressDigitKey(5);
+        calc.pressDigitKey(6);
+        calc.pressDigitKey(7);
+        calc.pressDigitKey(8);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(0);
+
+        String expected = "123456789";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 
 }
