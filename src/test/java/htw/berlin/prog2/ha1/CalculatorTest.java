@@ -90,7 +90,6 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
-
     @Test
     @DisplayName("should reset display with clear key")
     void testClearKeyResetsDisplay() {
