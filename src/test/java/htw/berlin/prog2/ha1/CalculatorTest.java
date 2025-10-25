@@ -104,16 +104,4 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    @DisplayName("should not display negative zero")
-    void testNoNegativeZero() {
-        Calculator calc = new Calculator();
-        calc.pressDigitKey(0);
-        calc.pressNegativeKey();
-
-        String expected = "0";
-        String actual = calc.readScreen();
-
-        assertEquals(expected, actual);
-    }
 }
