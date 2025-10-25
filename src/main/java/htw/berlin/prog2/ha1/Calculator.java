@@ -27,13 +27,18 @@ public class Calculator {
      * Führt in jedem Fall dazu, dass die gerade gedrückte Ziffer auf dem Bildschirm angezeigt
      * oder rechts an die zuvor gedrückte Ziffer angehängt angezeigt wird.
      * @param digit Die Ziffer, deren Taste gedrückt wurde
+     * Es werden maximal 9 Ziffern akzeptiert.
      */
     public void pressDigitKey(int digit) {
-        if(digit > 9 || digit < 0) throw new IllegalArgumentException();
+        if(digit < 0  || digit > 9 ) throw new IllegalArgumentException();
 
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
-
-        screen = screen + digit;
+        if(screen.equals("0")) {
+            latestValue = Double.parseDouble(screen);
+            screen = "";
+        }
+        if (screen.length() < 9) {
+            screen = screen + digit;
+        }
     }
 
     /**
@@ -44,11 +49,12 @@ public class Calculator {
      * Werte sowie der aktuelle Operationsmodus zurückgesetzt, so dass der Rechner wieder
      * im Ursprungszustand ist.
      */
-    public void pressClearKey() {
+    public void pressClearKey () {
         screen = "0";
         latestOperation = "";
         latestValue = 0.0;
-    }
+        }
+
 
     /**
      * Empfängt den Wert einer gedrückten binären Operationstaste, also eine der vier Operationen
@@ -103,10 +109,14 @@ public class Calculator {
      * aktualisiert und die Inhalt fortan als negativ interpretiert.
      * Zeigt der Bildschirm bereits einen negativen Wert mit führendem Minus an, dann wird dieses
      * entfernt und der Inhalt fortan als positiv interpretiert.
+     * Wenn der Bildschirm "0" anzeigt, wird keine Änderung vorgenommen.
      */
     public void pressNegativeKey() {
 
-        screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
+       if (screen.equals("0")) {
+           return;
+       }
+           screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
     }
 
     /**
